@@ -17,7 +17,7 @@ import React, {
 
 import BuildListComponent from './BuildListComponent'
 const Routes = require('./Routes');
-
+const Realm = require('realm');
 class NavButton extends React.Component {
   render() {
     return (
@@ -72,7 +72,24 @@ var NavigationBarRouteMapper = {
 
 
 class IDBStoreRN extends Component {
-
+  //
+  // render() {
+  //   let realm = new Realm({
+  //     schema: [{name: 'Dog', properties: {name: 'string'}}]
+  //   });
+  //
+  //   realm.write(() => {
+  //     realm.create('Dog', {name: 'Rex'});
+  //   });
+  //
+  //   return (
+  //     <View style={styles.container}>
+  //       <Text style={styles.welcome}>
+  //         Count of Dogs in Realm: {realm.objects('Dog').length}
+  //       </Text>
+  //     </View>
+  //   );
+  // }
 
   render() {
     let defaultName = 'BuildListComponent';
@@ -88,6 +105,9 @@ class IDBStoreRN extends Component {
 }
 
 var styles = StyleSheet.create({
+  container:{
+    top: 40,
+  },
   base: {
     flex: 1,
   },

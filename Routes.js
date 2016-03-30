@@ -21,38 +21,36 @@ const {
 var NavigationBarRouteMapper = {
 
   LeftButton: function(route, navigator, index, navState) {
-    if (index === 0) {
-      return null;
-    }
-
-    var previousRoute = navState.routeStack[index - 1];
     return (
       <TouchableOpacity
         onPress={() => navigator.pop()}
         style={styles.navBarLeftButton}>
-        <Text style={[styles.navBarText, styles.navBarButtonText]}>
-          {previousRoute.title}
-        </Text>
+        <Icon
+          name='ios-arrow-back'
+          size={30}
+          style={{marginTop: 8}}
+          color={Colors.blue}
+        />
       </TouchableOpacity>
     );
   },
 
   RightButton: function(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity
-        onPress={() => navigator.push(newRandomRoute())}
-        style={styles.navBarRightButton}>
-        <Text style={[styles.navBarText, styles.navBarButtonText]}>
-          Next
-        </Text>
-      </TouchableOpacity>
-    );
+    // return (
+    //   <TouchableOpacity
+    //     onPress={() => navigator.push(newRandomRoute())}
+    //     style={styles.navBarRightButton}>
+    //     <Text style={[styles.navBarText, styles.navBarButtonText]}>
+    //       Next
+    //     </Text>
+    //   </TouchableOpacity>
+    // );
   },
 
   Title: function(route, navigator, index, navState) {
     return (
       <Text style={[styles.navBarText, styles.navBarTitleText]}>
-        123 [{index}]
+        产品
       </Text>
     );
   },
@@ -66,7 +64,7 @@ const routes = {
         style={styles.appContainer}
         initialRoute={{id: initialRoute}}
         renderScene={(route, navigator) => (
-         <BuildListComponent />
+         <BuildListComponent navigator={navigator}/>
         )}
         navigationBar={
           <Navigator.NavigationBar
@@ -109,8 +107,8 @@ const styles = StyleSheet.create({
   },
   navBar: {
     flex: 1,
-    width: 400,
-    backgroundColor: 'red',
+    // width: 400,
+    backgroundColor: 'white',
     borderBottomColor: Colors.borderColor,
     borderBottomWidth: 0.5,
   },
@@ -119,7 +117,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   navBarTitleText: {
-    color: '#cca3c3',
+    color: 'black',
     // color: cssVar('fbui-bluegray-60'),
     fontWeight: '500',
     marginVertical: 11,

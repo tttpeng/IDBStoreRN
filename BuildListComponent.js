@@ -21,7 +21,7 @@ var ListViewExample = React.createClass({
 
   render: function () {
     return (
-      <ListView style={styles.listStyle}
+      <ListView style={styles.container}
                 dataSource={this.state.dataSource}
                 renderRow={(rowData) =>
                 <TouchableHighlight onPress={this.openTargetUser} underlayColor={'lightGray'}>
@@ -39,12 +39,7 @@ var ListViewExample = React.createClass({
     //为什么这里可以取得 props.navigator?请看上文:
     //<Component {...route.params} navigator={navigator} />
     //这里传递了navigator作为props
-    if(navigator) {
-      navigator.push({
-        name: 'BuildListComponent',
-        component: BuildListComponent,
-      })
-    }
+    this.props.navigator.push({id: 'trend'});
   },
 
   _genRows: function ():Array<string> {
@@ -61,9 +56,20 @@ var ListViewExample = React.createClass({
 })
 
 
+
 var styles = StyleSheet.create({
   listStyle: {
     top: 20,
+  },
+  container: {
+    flex: 1,
+    paddingTop: 64,
+    backgroundColor: 'white',
+  },
+  tabView: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: 'rgba(0,0,0,0.01)',
   },
   cellContentView: {
     flexDirection: 'row',
