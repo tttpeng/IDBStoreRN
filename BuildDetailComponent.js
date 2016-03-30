@@ -14,18 +14,12 @@ export default class SecondPageComponent extends React.Component {
     this.state = {};
   }
 
-  _pressButton() {
-    const { navigator } = this.props;
-    if(navigator) {
-      //很熟悉吧，入栈出栈~ 把当前的页面pop掉，这里就返回到了上一个页面:FirstPageComponent了
-      navigator.pop();
-    }
-  }
+
 
   render() {
     return (
       <View style={styles.base}>
-        <TouchableOpacity onPress={this._pressButton.bind(this)}>
+        <TouchableOpacity style={{marginTop : 100}}>
           <Text>点我跳回去</Text>
         </TouchableOpacity>
       </View>
@@ -35,8 +29,12 @@ export default class SecondPageComponent extends React.Component {
 
 const styles = StyleSheet.create({
   base: {
-    marginTop: 20,
+    // marginTop: 200,
     flex:1,
     backgroundColor:'blue',
   },
 });
+
+
+
+module.exports = SecondPageComponent;

@@ -1,4 +1,5 @@
 var React = require("react-native")
+import BuildService from './BuildService'
 
 var {
   ListView,
@@ -19,14 +20,27 @@ var ListViewExample = React.createClass({
     }
   },
 
+  componentDidMount() {
+    BuildService.loadBuildList('http://www.pgyer.com/apiv1/user/listMyPublished')
+      .then ((response) => response.json())
+      .then((responseData) => {
+        console.log(responseData);
+        this.setState ({
+          dataSource: this.state.dataSource.cloneWithRows(responseData.data.list)
+        })
+      })
+      .done();
+
+  },
+
   render: function () {
     return (
       <ListView style={styles.container}
                 dataSource={this.state.dataSource}
                 renderRow={(rowData) =>
-                <TouchableHighlight onPress={this.openTargetUser} underlayColor={'lightGray'}>
+                <TouchableHighlight onPress={this.openTargetUser} underlayColor={'#8C8C8C'}>
                   <View style={styles.cellContentView}>
-                    <Text style={styles.userName}>{rowData.name}</Text>
+                    <Text style={styles.userName}>{rowData.appName}</Text>
                   </View>
                 </TouchableHighlight>
      }
@@ -35,11 +49,8 @@ var ListViewExample = React.createClass({
   },
 
   openTargetUser: function () {
-    const { navigator } = this.props;
-    //为什么这里可以取得 props.navigator?请看上文:
-    //<Component {...route.params} navigator={navigator} />
-    //这里传递了navigator作为props
-    this.props.navigator.push({id: 'trend'});
+    const {navigator} = this.props;
+    this.props.navigator.push({id: 'detail'});
   },
 
   _genRows: function ():Array<string> {
@@ -54,7 +65,6 @@ var ListViewExample = React.createClass({
     return dataBlob;
   }
 })
-
 
 
 var styles = StyleSheet.create({

@@ -6,6 +6,7 @@ const ScreenWidth = Dimensions.get('window').width;
 const Icon = require('react-native-vector-icons/Ionicons');
 
 const BuildListComponent = require('./BuildListComponent')
+const BuildDetailComponent = require('./BuildDetailComponent')
 
 const {
   Navigator,
@@ -63,9 +64,7 @@ const routes = {
         debugOverlay={false}
         style={styles.appContainer}
         initialRoute={{id: initialRoute}}
-        renderScene={(route, navigator) => (
-         <BuildListComponent navigator={navigator}/>
-        )}
+        renderScene={this.renderScene}
         navigationBar={
           <Navigator.NavigationBar
             routeMapper={NavigationBarRouteMapper}
@@ -80,8 +79,9 @@ const routes = {
   renderScene(route, navigator) {
     switch (route.id) {
       case 'trend':
-        console.log('加载页面');
-        return <BuildListComponent />;
+        return <BuildListComponent navigator={navigator}/>;
+      case 'detail':
+        return <BuildDetailComponent navigator={navigator}/>;
     }
     return null;
   }
