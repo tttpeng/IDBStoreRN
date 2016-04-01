@@ -20,7 +20,9 @@ class UserCell extends React.Component {
         <View style={styles.rightContainer}>
         <Text style={styles.nameTextStyle}>{build.appName}</Text>
         <Text style={styles.versionStyle}>版本:{build.appVersion}, {(build.appFileSize/1024/1024).toFixed(1)}MB</Text>
-        <Text style={styles.tagStyle}>iOS</Text>
+        <View style={styles.tagStyle}>
+        <Text style={styles.tagTextStyle}>iOS</Text>
+        </View>
         </View>
 
       </View>
@@ -59,21 +61,27 @@ const styles = StyleSheet.create({
     color: 'gray',
     // backgroundColor: 'blue',
   },
+  tagTextStyle:{
+    width : 18,
+    height: 11,
+    backfaceVisibility: 'visible',
+    marginLeft: 4,
+    marginTop: 1,
+    color:'white',
+    fontSize: 10,
+  },
   tagStyle:{
     width : 24,
     height: 14,
     marginLeft: 10,
-    color:'white',
     backgroundColor: '#3DC4D8',
-    marginTop: -16,
-    borderRadius: 3,
-    fontSize: 10,
-    textAlign: 'center',
+    marginTop:-16,
+    borderColor: '#3DC4D8',
+    borderRadius: 4,
   },
   rightContainer: {
     flex: 1,
     height: 50,
-    // backgroundColor: 'red',
   },
 
 
