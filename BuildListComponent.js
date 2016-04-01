@@ -1,6 +1,7 @@
 var React = require("react-native")
 import BuildService from './BuildService'
 const Realm = require('realm');
+import BuildCell from './BuildCell'
 
 var {
   ListView,
@@ -14,45 +15,53 @@ var {
 import BuildListComponent from './BuildDetailComponent'
 
 
+let realm = new Realm();
 
 
+class ListViewExample extends React.Component {
 
-var ListViewExample = React.createClass({
-  getInitialState: function () {
+  constructor(props) {
+    super(props);
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    return {
-      dataSource: ds.cloneWithRows(this._genRows()),
-    }
-  },
-
-
+    this.state = {
+      dataSource: ds,
+    };
+  }
 
   componentDidMount() {
     BuildService.loadBuildList('http://www.pgyer.com/apiv1/user/listMyPublished',1)
-      .then((value) => console.log(value));
-  },
+      .then((value) => {
+        let builds = realm.objects("Build");
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(builds),
+        })
+        console.log(builds);
 
-  render: function () {
+      });
+  }
+
+
+  renderRow = (rowData, sectionID, rowID, highlightRow) => {    
+    return (
+      <BuildCell key={rowID} build={rowData} navigator={this.props.navigator}/>
+    )
+  }
+
+  render() {
     return (
       <ListView
         style={styles.container}
         dataSource={this.state.dataSource}
-        renderRow={(rowData) =>
-                        <TouchableHighlight onPress={this.openTargetUser} underlayColor={'#8C8C8C'}>
-                          <View style={styles.cellContentView}>
-                            <Text style={styles.userName}>{rowData.appName}</Text>
-                          </View>
-                        </TouchableHighlight>
-                          }/>
+        renderRow={this.renderRow}/>
     );
-  },
+  }
 
-  openTargetUser: function () {
+  openTargetUser = () => {
     const {navigator} = this.props;
     this.props.navigator.push({id: 'detail'});
-  },
+  }
 
-  _genRows: function ():Array<string> {
+  _genRows () {
     var dataBlob = [];
     for (var i = 0; i < 10; i++) {
       dataBlob.push({
@@ -63,7 +72,7 @@ var ListViewExample = React.createClass({
 
     return dataBlob;
   }
-})
+}
 
 
 var styles = StyleSheet.create({

@@ -16,5 +16,8 @@
     "ios": {
       "project": "ios/IDBStoreRN.xcodeproj"
     }
+  },
+  "devDependencies": {
+    "flow-bin": "^0.22.1"
   }
 }
