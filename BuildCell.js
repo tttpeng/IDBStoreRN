@@ -31,7 +31,8 @@ class UserCell extends React.Component {
         <TouchableHighlight
           onPress={this.downloadApp}
           style={styles.downloadButton}
-          underlayColor={'gray'}>
+          underlayColor={'gray'}
+          >
           <Text style={styles.downloadButtonText}>
             下载
           </Text>
@@ -124,8 +125,6 @@ const styles = StyleSheet.create({
     marginRight: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    // borderWidth:0.5,
-    // borderColor:'#E0E0E0',
     borderRadius: 5,
   },
   downloadButtonText: {
