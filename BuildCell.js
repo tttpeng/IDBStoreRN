@@ -118,18 +118,19 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   downloadButton: {
-    width: 45,
-    height: 23,
-    backgroundColor: '#F5F5F5',
+    width: 50,
+    height: 26,
+    backgroundColor: '#eeeeee',
     marginRight: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth:0.5,
-    borderColor:'#E0E0E0',
+    // borderWidth:0.5,
+    // borderColor:'#E0E0E0',
+    borderRadius: 5,
   },
   downloadButtonText: {
-    textAlign: 'center',  
-    fontSize: 16,
+    textAlign: 'center',
+    fontSize: 14,
   }
 
 });
