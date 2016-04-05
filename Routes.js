@@ -22,18 +22,18 @@ const {
 var NavigationBarRouteMapper = {
 
   LeftButton: function(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity
-        onPress={() => navigator.pop()}
-        style={styles.navBarLeftButton}>
-        <Icon
-          name='ios-arrow-back'
-          size={30}
-          style={{marginTop: 8}}
-          color={Colors.blue}
-        />
-      </TouchableOpacity>
-    );
+    // return (
+    //   <TouchableOpacity
+    //     onPress={() => navigator.pop()}
+    //     style={styles.navBarLeftButton}>
+    //     <Icon
+    //       name='ios-arrow-back'
+    //       size={30}
+    //       style={{marginTop: 8}}
+    //       color={Colors.blue}
+    //     />
+    //   </TouchableOpacity>
+    // );
   },
 
   RightButton: function(route, navigator, index, navState) {

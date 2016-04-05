@@ -4,6 +4,8 @@ import React, {
   View,
   Image,
   StyleSheet,
+  TouchableHighlight,
+  Linking,
 } from 'react-native'
 
 
@@ -26,9 +28,22 @@ class UserCell extends React.Component {
             <Text style={styles.versionStyle}>版本:{build.appVersion}, {(build.appFileSize/1024/1024).toFixed(1)}MB</Text>
           </View>
         </View>
-
+        <TouchableHighlight
+          onPress={this.downloadApp}
+          style={styles.downloadButton}
+          underlayColor={'gray'}>
+          <Text style={styles.downloadButtonText}>
+            下载
+          </Text>
+        </TouchableHighlight>
       </View>
     )
+  }
+
+  downloadApp = () => {
+    const build = this.props.build;
+    Linking.openURL('itms-services://?action=download-manifest&url=https://www.pgyer.com/app/plist/'+build.appKey)
+      .catch(err => console.error('An error occurred', err));
   }
 }
 
@@ -53,15 +68,11 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: '400',
     marginTop: 3,
-    // fontSize: 17,
     marginLeft: 10,
-    // backgroundColor:'green',
   },
   versionStyle:{
-    // marginTop: 10,
     marginLeft: 7,
     color: 'gray',
-    // backgroundColor: 'blue',
   },
   tagTextStyle:{
     width : 18,
@@ -106,6 +117,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 12,
   },
+  downloadButton: {
+    width: 45,
+    height: 23,
+    backgroundColor: '#F5F5F5',
+    marginRight: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth:0.5,
+    borderColor:'#E0E0E0',
+  },
+  downloadButtonText: {
+    textAlign: 'center',  
+    fontSize: 16,
+  }
 
 });
 
